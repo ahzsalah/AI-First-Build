@@ -5,7 +5,7 @@ export declare class SectionsService {
     constructor(websiteIdeaModel: Model<WebsiteIdeaDocument>);
     getAllWebsiteIdeas(): Promise<WebsiteIdea[]>;
     getWebsiteIdeaById(id: string): Promise<WebsiteIdea | null>;
-    createWebsiteIdea(idea: string, sections?: string[]): Promise<WebsiteIdea>;
+    createWebsiteIdea(idea: string): Promise<WebsiteIdea>;
     updateWebsiteIdea(id: string, idea: string, sections?: string[]): Promise<WebsiteIdea | null>;
     deleteWebsiteIdea(id: string): Promise<WebsiteIdea | null>;
     getWebsiteIdeasCount(): Promise<number>;

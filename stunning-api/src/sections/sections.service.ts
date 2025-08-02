@@ -21,17 +21,13 @@ export class SectionsService {
     return this.websiteIdeaModel.findById(id).exec();
   }
 
-  async createWebsiteIdea(
-    idea: string,
-    sections: string[] = [],
-  ): Promise<WebsiteIdea> {
-    // Automatically assign default sections if none provided
+  async createWebsiteIdea(idea: string): Promise<WebsiteIdea> {
+    // Always use default sections
     const defaultSections = ['Hero', 'About', 'Contact'];
-    const finalSections = sections.length > 0 ? sections : defaultSections;
 
     const newWebsiteIdea = new this.websiteIdeaModel({
       idea,
-      sections: finalSections,
+      sections: defaultSections,
     });
     return newWebsiteIdea.save();
   }

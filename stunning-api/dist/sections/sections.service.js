@@ -28,12 +28,11 @@ let SectionsService = class SectionsService {
     async getWebsiteIdeaById(id) {
         return this.websiteIdeaModel.findById(id).exec();
     }
-    async createWebsiteIdea(idea, sections = []) {
+    async createWebsiteIdea(idea) {
         const defaultSections = ['Hero', 'About', 'Contact'];
-        const finalSections = sections.length > 0 ? sections : defaultSections;
         const newWebsiteIdea = new this.websiteIdeaModel({
             idea,
-            sections: finalSections,
+            sections: defaultSections,
         });
         return newWebsiteIdea.save();
     }

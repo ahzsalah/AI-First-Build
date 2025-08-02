@@ -34,11 +34,8 @@ export class SectionsController {
   }
 
   @Post('website-ideas')
-  createWebsiteIdea(@Body() createDto: { idea: string; sections?: string[] }) {
-    return this.sectionsService.createWebsiteIdea(
-      createDto.idea,
-      createDto.sections,
-    );
+  createWebsiteIdea(@Body() createDto: { idea: string }) {
+    return this.sectionsService.createWebsiteIdea(createDto.idea);
   }
 
   @Patch('website-ideas/:id')
@@ -59,10 +56,7 @@ export class SectionsController {
   }
 
   @Post('generate')
-  generateSections(@Body() generateDto: { idea: string; sections?: string[] }) {
-    return this.sectionsService.createWebsiteIdea(
-      generateDto.idea,
-      generateDto.sections,
-    );
+  generateSections(@Body() generateDto: { idea: string }) {
+    return this.sectionsService.createWebsiteIdea(generateDto.idea);
   }
 }

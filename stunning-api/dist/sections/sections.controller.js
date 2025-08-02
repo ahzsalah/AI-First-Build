@@ -33,7 +33,7 @@ let SectionsController = class SectionsController {
         return this.sectionsService.getWebsiteIdeaById(id);
     }
     createWebsiteIdea(createDto) {
-        return this.sectionsService.createWebsiteIdea(createDto.idea, createDto.sections);
+        return this.sectionsService.createWebsiteIdea(createDto.idea);
     }
     updateWebsiteIdea(id, updateDto) {
         return this.sectionsService.updateWebsiteIdea(id, updateDto.idea, updateDto.sections);
@@ -42,7 +42,7 @@ let SectionsController = class SectionsController {
         return this.sectionsService.deleteWebsiteIdea(id);
     }
     generateSections(generateDto) {
-        return this.sectionsService.createWebsiteIdea(generateDto.idea, generateDto.sections);
+        return this.sectionsService.createWebsiteIdea(generateDto.idea);
     }
 };
 exports.SectionsController = SectionsController;

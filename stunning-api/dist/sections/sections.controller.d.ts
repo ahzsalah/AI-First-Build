@@ -8,7 +8,6 @@ export declare class SectionsController {
     getWebsiteIdeaById(id: string): Promise<import("../website-ideas/schemas/website-idea.schema").WebsiteIdea | null>;
     createWebsiteIdea(createDto: {
         idea: string;
-        sections?: string[];
     }): Promise<import("../website-ideas/schemas/website-idea.schema").WebsiteIdea>;
     updateWebsiteIdea(id: string, updateDto: {
         idea: string;
@@ -17,6 +16,5 @@ export declare class SectionsController {
     deleteWebsiteIdea(id: string): Promise<import("../website-ideas/schemas/website-idea.schema").WebsiteIdea | null>;
     generateSections(generateDto: {
         idea: string;
-        sections?: string[];
     }): Promise<import("../website-ideas/schemas/website-idea.schema").WebsiteIdea>;
 }
