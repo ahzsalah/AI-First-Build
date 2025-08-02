@@ -13,6 +13,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const website_ideas_module_1 = require("./website-ideas/website-ideas.module");
+const sections_module_1 = require("./sections/sections.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -31,6 +32,7 @@ exports.AppModule = AppModule = __decorate([
                 inject: [config_1.ConfigService],
             }),
             website_ideas_module_1.WebsiteIdeasModule,
+            sections_module_1.SectionsModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

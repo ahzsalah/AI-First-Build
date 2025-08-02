@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { WebsiteIdeasModule } from './website-ideas/website-ideas.module';
+import { SectionsModule } from './sections/sections.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { WebsiteIdeasModule } from './website-ideas/website-ideas.module';
       inject: [ConfigService],
     }),
     WebsiteIdeasModule,
+    SectionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
