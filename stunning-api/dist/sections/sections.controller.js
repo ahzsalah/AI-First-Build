@@ -20,6 +20,9 @@ let SectionsController = class SectionsController {
     constructor(sectionsService) {
         this.sectionsService = sectionsService;
     }
+    getAllSections() {
+        return this.sectionsService.getAllWebsiteIdeas();
+    }
     getAllWebsiteIdeas() {
         return this.sectionsService.getAllWebsiteIdeas();
     }
@@ -30,16 +33,25 @@ let SectionsController = class SectionsController {
         return this.sectionsService.getWebsiteIdeaById(id);
     }
     createWebsiteIdea(createDto) {
-        return this.sectionsService.createWebsiteIdea(createDto.idea);
+        return this.sectionsService.createWebsiteIdea(createDto.idea, createDto.sections);
     }
     updateWebsiteIdea(id, updateDto) {
-        return this.sectionsService.updateWebsiteIdea(id, updateDto.idea);
+        return this.sectionsService.updateWebsiteIdea(id, updateDto.idea, updateDto.sections);
     }
     deleteWebsiteIdea(id) {
         return this.sectionsService.deleteWebsiteIdea(id);
     }
+    generateSections(generateDto) {
+        return this.sectionsService.createWebsiteIdea(generateDto.idea, generateDto.sections);
+    }
 };
 exports.SectionsController = SectionsController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], SectionsController.prototype, "getAllSections", null);
 __decorate([
     (0, common_1.Get)('website-ideas'),
     __metadata("design:type", Function),
@@ -81,6 +93,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], SectionsController.prototype, "deleteWebsiteIdea", null);
+__decorate([
+    (0, common_1.Post)('generate'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], SectionsController.prototype, "generateSections", null);
 exports.SectionsController = SectionsController = __decorate([
     (0, common_1.Controller)('sections'),
     __metadata("design:paramtypes", [sections_service_1.SectionsService])

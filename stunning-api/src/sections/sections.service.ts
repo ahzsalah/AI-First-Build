@@ -21,17 +21,28 @@ export class SectionsService {
     return this.websiteIdeaModel.findById(id).exec();
   }
 
-  async createWebsiteIdea(idea: string): Promise<WebsiteIdea> {
-    const newWebsiteIdea = new this.websiteIdeaModel({ idea });
+  async createWebsiteIdea(
+    idea: string,
+    sections: string[] = [],
+  ): Promise<WebsiteIdea> {
+    // Automatically assign default sections if none provided
+    const defaultSections = ['Hero', 'About', 'Contact'];
+    const finalSections = sections.length > 0 ? sections : defaultSections;
+
+    const newWebsiteIdea = new this.websiteIdeaModel({
+      idea,
+      sections: finalSections,
+    });
     return newWebsiteIdea.save();
   }
 
   async updateWebsiteIdea(
     id: string,
     idea: string,
+    sections: string[] = [],
   ): Promise<WebsiteIdea | null> {
     return this.websiteIdeaModel
-      .findByIdAndUpdate(id, { idea }, { new: true })
+      .findByIdAndUpdate(id, { idea, sections }, { new: true })
       .exec();
   }
 

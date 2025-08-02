@@ -7,6 +7,9 @@ export type WebsiteIdeaDocument = WebsiteIdea & Document;
 export class WebsiteIdea {
   @Prop({ required: true })
   idea: string;
+
+  @Prop({ type: [String], default: [] })
+  sections: string[];
 }
 
 export const WebsiteIdeaSchema = SchemaFactory.createForClass(WebsiteIdea);

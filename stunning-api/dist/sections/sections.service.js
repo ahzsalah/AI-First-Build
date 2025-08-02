@@ -28,13 +28,18 @@ let SectionsService = class SectionsService {
     async getWebsiteIdeaById(id) {
         return this.websiteIdeaModel.findById(id).exec();
     }
-    async createWebsiteIdea(idea) {
-        const newWebsiteIdea = new this.websiteIdeaModel({ idea });
+    async createWebsiteIdea(idea, sections = []) {
+        const defaultSections = ['Hero', 'About', 'Contact'];
+        const finalSections = sections.length > 0 ? sections : defaultSections;
+        const newWebsiteIdea = new this.websiteIdeaModel({
+            idea,
+            sections: finalSections,
+        });
         return newWebsiteIdea.save();
     }
-    async updateWebsiteIdea(id, idea) {
+    async updateWebsiteIdea(id, idea, sections = []) {
         return this.websiteIdeaModel
-            .findByIdAndUpdate(id, { idea }, { new: true })
+            .findByIdAndUpdate(id, { idea, sections }, { new: true })
             .exec();
     }
     async deleteWebsiteIdea(id) {

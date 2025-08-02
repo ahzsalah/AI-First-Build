@@ -13,12 +13,17 @@ exports.WebsiteIdeaSchema = exports.WebsiteIdea = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 let WebsiteIdea = class WebsiteIdea {
     idea;
+    sections;
 };
 exports.WebsiteIdea = WebsiteIdea;
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], WebsiteIdea.prototype, "idea", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: [String], default: [] }),
+    __metadata("design:type", Array)
+], WebsiteIdea.prototype, "sections", void 0);
 exports.WebsiteIdea = WebsiteIdea = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true })
 ], WebsiteIdea);
