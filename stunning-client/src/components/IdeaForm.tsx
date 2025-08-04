@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { generateSections, WebsiteIdea } from "@/lib/api";
+import { generateSections } from "@/lib/api";
+import PreviewModal from "./PreviewModal";
 
 export default function IdeaForm() {
   const [idea, setIdea] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<WebsiteIdea | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [submittedIdea, setSubmittedIdea] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,11 +21,11 @@ export default function IdeaForm() {
 
     setLoading(true);
     setError(null);
-    setResult(null);
 
     try {
-      const response = await generateSections(idea);
-      setResult(response);
+      await generateSections(idea);
+      setSubmittedIdea(idea);
+      setShowModal(true);
       setIdea(""); // Clear the form after successful submission
     } catch (err) {
       setError(
@@ -49,7 +51,7 @@ export default function IdeaForm() {
             value={idea}
             onChange={(e) => setIdea(e.target.value)}
             placeholder="Describe your website idea (e.g., A portfolio website for photographers)"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
             rows={4}
             disabled={loading}
           />
@@ -58,7 +60,7 @@ export default function IdeaForm() {
         <button
           type="submit"
           disabled={loading || !idea.trim()}
-          className="w-full flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           {loading ? (
             <>
@@ -118,43 +120,12 @@ export default function IdeaForm() {
         </div>
       )}
 
-      {/* Success Result */}
-      {result && (
-        <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-md">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <svg
-                className="h-5 w-5 text-green-400"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <h3 className="text-sm font-medium text-green-800">
-                Sections Generated!
-              </h3>
-              <div className="mt-2 text-sm text-green-700">
-                <p>
-                  <strong>Idea:</strong> {result.idea}
-                </p>
-                <p>
-                  <strong>Sections:</strong> {result.sections.join(", ")}
-                </p>
-                <p className="text-xs text-green-600 mt-1">
-                  Created: {new Date(result.createdAt).toLocaleString()}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Preview Modal */}
+      <PreviewModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        idea={submittedIdea}
+      />
     </div>
   );
 }
